@@ -47,7 +47,7 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    articles = ArticleSerializer(many=True, read_only=True, source='category.title')  # Category'dan articles olish
+    articles = ArticleSerializer(many=True, read_only=True)  # Category'dan articles olish
 
     class Meta:
         model = Category
