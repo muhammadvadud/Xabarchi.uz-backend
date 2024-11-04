@@ -13,7 +13,6 @@ class ArticleSectionSerializer(serializers.ModelSerializer):
         model = ArticleSection
         fields = ['text', 'image', 'order', ]
 
-
 class ArticleSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='category.name', read_only=True)
 
@@ -27,6 +26,8 @@ class ArticleSerializer(serializers.ModelSerializer):
         for section_data in sections_data:
             ArticleSection.objects.create(article=article, **section_data)
         return article
+
+
 
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
@@ -45,10 +46,8 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
             ArticleSection.objects.create(article=article, **section_data)
         return article
 
-
 class CategorySerializer(serializers.ModelSerializer):
-    articles = ArticleSerializer(many=True, read_only=True, source='category.title')  # Category'dan articles olish
-
+    articles = ArticleSerializer(many=True, read_only=True) 
     class Meta:
         model = Category
         fields = ['id', 'name', 'articles']

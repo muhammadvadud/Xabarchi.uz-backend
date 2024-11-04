@@ -35,7 +35,7 @@ class Comment(models.Model):
 class Article(models.Model):
     title = models.TextField()
     slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    category = models.ForeignKey(Category, related_name='articles', on_delete=models.CASCADE)  # O'zgartirdik
     is_published = models.BooleanField(default=False)
     published_date = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
