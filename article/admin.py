@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ArticleSection, Article, Comment, Tag, Category
+from .models import Article, ArticleSection, Comment, Tag, Category
 
 
 class ArticleSectionInline(admin.TabularInline):  # Yoki admin.StackedInline
@@ -8,8 +8,9 @@ class ArticleSectionInline(admin.TabularInline):  # Yoki admin.StackedInline
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'is_published')  # Ko'rsatish kerak bo'lgan maydonlar
+    list_display = ('id', 'title', 'is_published')  # Ko'rsatish kerak bo'lgan maydonlar
     inlines = [ArticleSectionInline]  # ArticleSection inline qo'shish
+    filter_horizontal = ('tags',)  # Taglarni tanlashda osonlik yaratadi
 
 
 admin.site.register(Article, ArticleAdmin)
