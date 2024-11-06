@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, ArticleSection, Comment, Tag, Category
+from .models import Article, ArticleSection, Tag, Category
 
 
 class ArticleSectionInline(admin.TabularInline):  # Yoki admin.StackedInline
@@ -15,6 +15,5 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleSection)
-admin.site.register(Comment)
 admin.site.register(Tag)
 admin.site.register(Category)

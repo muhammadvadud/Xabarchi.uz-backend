@@ -1,10 +1,11 @@
-from django.urls import path, include
-from .views import ArticleListCreateAPIView, ArticleDetailAPIView, CategoryArticleView, CategoryListView
+from django.urls import path
+from .views import ArticleListAPIView, ArticleDetailAPIView, CategoryArticleView, CategoryListView, ArticleSearchView
 
 urlpatterns = [
-    path('article/', ArticleListCreateAPIView.as_view(), name='article-list'),
-    path('article/<slug:slug>/', ArticleDetailAPIView.as_view(), name='article-detail'),
+    path('news/', ArticleListAPIView.as_view(), name='article-list'),
+    path('news/<slug:slug>/', ArticleDetailAPIView.as_view(), name='article-detail'),
+    path('search/', ArticleSearchView.as_view(), name='article-search'),
+    # Ushbu qator muhim
     path('category/', CategoryListView.as_view(), name='article-list'),
-    path('category/<int:id>/', CategoryArticleView.as_view(), name='category-detail')
-
+    path('category/<str:name>/', CategoryArticleView.as_view(), name='category-detail'),
 ]

@@ -16,10 +16,11 @@ class ArticleSectionSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='category.name', read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'slug', 'published_date', 'category']
+        fields = ['id', 'title', 'slug', 'basic_image', 'published_date', 'category', 'tags']
 
     def create(self, validated_data):
         sections_data = validated_data.pop('sections')
@@ -47,6 +48,12 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
+
+
+class CategoryArticleSerializer(serializers.ModelSerializer):
     articles = ArticleSerializer(many=True, read_only=True)  # Category'dan articles olish
 
     class Meta:
